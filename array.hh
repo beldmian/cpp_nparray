@@ -32,13 +32,17 @@ class Array {
 
     Array<T>& operator[] (std::size_t);
 
-    void transpose();
+    Array<T> transpose();
 };
 
 template class Array<int>;
 
 template<class T>
 std::ostream& operator<< (std::ostream& o, Array<T> arr) {
+  if ( arr.data.size() == 0 ) {
+    o << "[]";
+    return o;
+  }
   if (arr.shape.size() == 0 ) {
     o << *arr.data[0];
     return o;

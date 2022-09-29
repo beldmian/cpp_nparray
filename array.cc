@@ -1,4 +1,5 @@
 #include "array.hh"
+#include <stdexcept>
 #include <vector>
 #include <iostream>
 
@@ -126,11 +127,17 @@ Array<T> Array<T>::operator/ (Array<T> val) {
 }
 
 template<class T>
-void Array<T>::transpose() {
-  // TODO
+Array<T> Array<T>::transpose() {
   if (this->shape.size() != 2) {
-    throw std::length_error("Cannot transpose nparray with not 2 dimentions");
+    throw std::logic_error("Cannot transpose nparray with not 2 dimentions");
   }
-  std::swap(this->shape[0], this->shape[1]);
+  std::vector<int>* temp_shape = new std::vector<int>{this->shape[1], this->shape[0]};
+  Array<T>* temp = new Array<T>(*temp_shape);
+  for (int i = 0; i < this->shape[0]; i++) {
+    for (int j = 0; j < this->shape[1]; j++) {
+      (*temp)[j][i] = (*this)[i][j];
+    }
+  }
+  return *temp;
 }
 
