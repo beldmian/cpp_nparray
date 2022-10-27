@@ -1,8 +1,8 @@
+#include "array.hh"
 #include <iostream>
 #include <vector>
-#include "array.hh"
 
-int main (int argc, char *argv[]) {
+int main(int argc, char *argv[]) {
   std::vector<int> shape = {3, 2};
   Array<int> arr = Array<int>(shape);
   arr[0][0] = 1;
@@ -12,7 +12,13 @@ int main (int argc, char *argv[]) {
   arr[2][0] = 5;
   arr[2][1] = 6;
   std::cout << arr << std::endl;
-  Array<int> new_arr = arr.transpose();
-  std::cout << new_arr;
+  Array<int> vec = Array<int>(std::vector<int>{2, 2});
+  vec[0][0] = 1;
+  vec[0][1] = 2;
+  vec[1][0] = 3;
+  vec[1][1] = 4;
+  std::cout << vec << std::endl;
+  Array<int> out = arr * vec;
+  std::cout << out << std::endl;
   return 0;
 }
